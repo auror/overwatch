@@ -248,6 +248,8 @@ func main() {
 			for _, record := range *records {
 				encodedId := EncodeId(record.Id)
 				location := *record.Loc
+				cellId := s2.CellIDFromLatLng(s2.LatLngFromDegrees(location.Lat, location.Lng))
+				location.SetCellId(cellId)
 				bytes := Encode(location)
 				if bytes == nil {
 					log.Debugf("Cannot be encoded: %v", location)
